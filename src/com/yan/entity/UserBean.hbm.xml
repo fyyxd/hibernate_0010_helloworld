@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- 
+    映射元文件用于说明类和表之间的对应关系   <class>  name="实体类的全名"  table="对应的表名" schema="模式"建议删除
+-->
+<hibernate-mapping>
+    <class name="com.yan.entity.UserBean" table="T_USRES">
+    <!-- 
+    用户说明类中的标识属性和主键之间的对应关系 
+    	<id>用户说明标识属性  name="属性名称" type="属性类型"
+    		<column>用于说明所对应的列   name="列名称"  后面还有一些约束说明  
+    			例如 presicion="总位宽" scale="小数位数"
+     -->
+        <id name="id" type="java.lang.Long">
+            <column name="ID" precision="18" scale="0" />
+            <!-- 标识生成器  class="sequence"表示标识值是由序列生成的  默认序列名称为hibernate_sequence  可以配置序列名称 -->
+            <generator class="sequence">
+            	<param name="sequence">seq_users</param>
+            </generator>
+        </id>
+     <!-- 
+     	property用于说明非键属性   name="属性名" type="类型"
+     		<column>用于说明该属性对应的列    name="列名称"  后面带有一些约束说明
+     			比如 length="字串长度"  not-null='true'该列非空  unique="true"有唯一性约束
+      -->   
+        <property name="username" type="java.lang.String">
+            <column name="USERNAME" length="20" not-null="true" unique="true" />
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="PASSWORD" length="20" not-null="true" />
+        </property>
+        <property name="birth" type="java.util.Date">
+            <column name="BIRTH" length="7" />
+        </property>
+        <property name="sex" type="java.lang.Boolean">
+            <column name="SEX" precision="1" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<!--hibernate的核心配置文件，主要包括3样配置信息：  数据库连接相关配置           hibernate的运行时常量       注册映射元文件-->
+<hibernate-configuration>
+
+	<session-factory>
+	<!-- 数据库连接相关配置 -->
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:ORCL</property>
+		<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="connection.username">yanjun</property>
+		<property name="connection.password">123456</property>
+	<!-- 数据库的方言设置，hibernate根据方言设置区分不同数据库，从而针对不同数据生成对应的SQL语句 这个配置是必须-->	
+		<property name="dialect">org.hibernate.dialect.Oracle9Dialect</property>
+		
+	<!-- 定义hibernate的运行时常量，比如是不是使用缓存、连接池等 -->
+		<property name="hbm2ddl.auto">update</property><!-- 自动同步映射元文件和表结构  对映射元文件的修改会同步到表结构上 -->
+		<property name="myeclipse.connection.profile">yan</property><!-- 连接概要名称，可以有可以没有 -->
+		<property name="show_sql">true</property><!-- 在控制台上输出所执行的sql语句，一般用于测试开发阶段，产品发布时必须修改 -->
+		<property name="format_sql">true</property><!-- 在控制台上格式化输出sql -->
+		
+	<!-- 注册映射元文件 -->	
+		<mapping resource="com/yan/entity/UserBean.hbm.xml" />
+
+	</session-factory>
+
+</hibernate-configuration>
